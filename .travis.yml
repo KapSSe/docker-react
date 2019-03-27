@@ -1,5 +1,4 @@
 sudo: required
-
 services:
   - docker
 
@@ -7,4 +6,4 @@ before_install:
   - docker build -t kapsse/docker-react:latest -f dev.Dockerfile .
 
 script:
-  - docker run kapsse/docker-react:latest npm run tests -- --coverage
+  - docker run kapsse/docker-react:latest npm run test -- --coverage
