@@ -1,9 +1,13 @@
 sudo: required
 services:
-  - docker
-
+- docker
 before_install:
-  - docker build -t kapsse/docker-react:latest -f dev.Dockerfile .
-
+- openssl aes-256-cbc -K $encrypted_16f8034609bf_key -iv $encrypted_16f8034609bf_iv
+  -in gae-key.json.enc -out gae-key.json -d
+- docker build -t kapsse/docker-react:latest -f Dockerfile .
 script:
-  - docker run kapsse/docker-react:latest npm run test -- --coverage
+- docker run kapsse/docker-react:latest npm run test -- --coverage
+deploy:
+  provider: gae
+  keyfile: "./gae-key.json"
+  project: docker-react-235908
